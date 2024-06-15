@@ -1,0 +1,116 @@
+
+////////////////////////// MY MOST FAVOURITE QUESTION //////////////////////////
+
+ class Solution {
+
+    static int checkAscending(MountainArray arr,int target,int start,int end,boolean asc){
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            int midValue=arr.get(mid);  // HERE WE NEED TO REDUCE THE ITERATION OF GET THAT WHY I WILL GET THE VALUE OF MID INDEX IN THE VARIABLE OF MIDVALUE AND THEN USE 
+            if(midValue>target){
+                if(asc){
+                    end=mid-1;
+                }else{
+                    start=mid+1;
+                }
+            }
+
+            else if(midValue<target){
+                if(asc){
+                    start=mid+1;
+                }else{
+                    end=mid-1;
+                }
+            }else{
+                return mid;
+            }
+        }
+        return -1;
+    }
+    static int pickArr(MountainArray arr){
+        int start=0;
+        int end=arr.length()-1;
+        while(start<end){
+            int mid=start+(end-start)/2;
+            if(arr.get(mid)>arr.get(mid+1)){
+                end=mid;
+            }else{
+                start=mid+1;
+            }
+        }
+        return start;
+    }
+    public int findInMountainArray(int target, MountainArray arr) {
+        int first=checkAscending(arr,target,0,pickArr(arr),true);
+        int last=checkAscending(arr,target,pickArr(arr)+1,arr.length()-1,false);
+
+        if(first!=-1){
+            return first;
+        }else if(first==-1 && last!=-1){
+            return last;
+        }else{
+            return -1;
+        }
+    }
+}
+
+
+
+
+
+
+
+////////////////////////////// SECOND SOLUTION //////////////////////////////
+
+// class Solution {
+
+//     // Method to find the peak element index in the mountain array
+//     static int findPeak(MountainArray arr) {
+//         int start = 0;
+//         int end = arr.length() - 1;
+//         while (start < end) {
+//             int mid = start + (end - start) / 2;
+//             if (arr.get(mid) > arr.get(mid + 1)) {
+//                 end = mid; // we are in the decreasing part
+//             } else {
+//                 start = mid + 1; // we are in the increasing part
+//             }
+//         }
+//         return start; // or end, since start == end
+//     }
+
+//     // Method to perform binary search in an array (ascending or descending)
+//     static int binarySearch(MountainArray arr, int target, int start, int end, boolean asc) {
+//         while (start <= end) {
+//             int mid = start + (end - start) / 2;
+//             int midValue = arr.get(mid);
+//             if (midValue == target) {
+//                 return mid;
+//             }
+//             if (asc) { // ascending order
+//                 if (midValue < target) {
+//                     start = mid + 1;
+//                 } else {
+//                     end = mid - 1;
+//                 }
+//             } else { // descending order
+//                 if (midValue > target) {
+//                     start = mid + 1;
+//                 } else {
+//                     end = mid - 1;
+//                 }
+//             }
+//         }
+//         return -1;
+//     }
+
+//     // Method to find target in the mountain array
+//     public int findInMountainArray(int target, MountainArray arr) {
+//         int peak = findPeak(arr);
+//         int firstTry = binarySearch(arr, target, 0, peak, true);
+//         if (firstTry != -1) {
+//             return firstTry;
+//         }
+//         return binarySearch(arr, target, peak + 1, arr.length() - 1, false);
+//     }
+// }
