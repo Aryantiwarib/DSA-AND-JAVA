@@ -1,0 +1,60 @@
+//////////////////////// MY SOLUTION ////////////////////////
+
+class Solution {
+
+    static boolean Sort(int[] arr){
+        boolean swapped=false;
+        for (int i=0;i<arr.length;i++){
+            for(int j=1;j<arr.length-i;j++){
+                if(arr[j]<arr[j-1]){
+                    int temp=arr[j];
+                    arr[j]=arr[j-1];
+                    arr[j-1]=temp;
+                    swapped=true;
+                }
+                else if(arr[j]==arr[j-1]){
+                    swapped=true;
+                    return true;
+
+                }
+            }
+            if(!swapped){
+                break;
+            }
+
+        }
+        return false;
+    }
+
+    public boolean containsDuplicate(int[] nums) {
+        // Arrays.sort(nums);
+        boolean c=Sort(nums);;
+        return c;
+    }
+}
+
+
+
+///////////////////// BEST SOLUTION OF LEETCODE /////////////////////
+
+//  class Solution {
+//     public boolean containsDuplicate(int[] nums) {
+//         int i = 1;
+//         int n = nums.length;
+
+//         while (i < n) {
+//             if (nums[i] == nums[i-1]) {
+//                 return true;
+//             } else if (nums[i] < nums[i-1]) {
+//                 for (int j = i-2; j >= 0; j--) {
+//                     if (nums[i] == nums[j]) return true;
+//                 }
+//                 int temp = nums[i];
+//                 nums[i] = nums[i-1];
+//                 nums[i-1] = temp;
+//             }
+//             i++;
+//         }
+//         return false;
+//     }
+// }
