@@ -1,0 +1,37 @@
+class Solution {
+    
+    static int[] Cycle2(int[] arr) {
+        int i=0;
+        while(i<arr.length) {
+            int correct=arr[i]-1;
+            if(arr[i]<=arr.length && arr[i]!=arr[correct]){
+                swap(arr,i,correct);
+            }
+            else{
+                i++;
+            }
+        }
+        // ArrayList <Integer> l=new ArrayList<>();
+        int[] a=new int[2];
+        for(int j=0;j<arr.length;j++){
+            if(j+1!=arr[j]){
+                a[0]=arr[j];
+                a[1]=j+1;
+
+            }
+        }
+        return a;
+
+    }
+
+    static void swap(int[] arr, int i, int correct) {
+        int temp=arr[i];
+        arr[i]=arr[correct];
+        arr[correct]=temp;
+    }
+    
+    
+    public int[] findErrorNums(int[] nums) {
+        return Cycle2(nums);
+    }
+}
