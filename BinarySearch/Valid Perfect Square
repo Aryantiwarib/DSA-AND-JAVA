@@ -1,0 +1,30 @@
+class Solution {
+    
+    static boolean PerfectSquare(int n){
+        long start=0;
+        long end=n;
+        while(start<=end){
+            long mid=start+(end-start)/2;
+            if(mid*mid==n){
+                return true;
+            }
+            else if(mid*mid>n){
+                end=mid-1;
+            }
+            else{
+                start=mid+1;
+            }
+
+        }
+        return false;
+    }
+    
+    public boolean isPerfectSquare(int num) {
+        return PerfectSquare(num);
+    }
+}
+
+        // if(Math.sqrt(num)==(int)Math.sqrt(num)){
+        //     return true;
+        // }
+        // return false;
