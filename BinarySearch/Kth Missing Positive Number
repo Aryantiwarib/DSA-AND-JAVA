@@ -1,0 +1,94 @@
+
+// MY SOLUTION VERY INTERESTING QUESTION 
+
+class Solution {
+    static int search(int[] arr,int n){
+        int start=0;
+        int end=arr.length-1;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            if(arr[mid]==n){
+                return mid;    
+            }
+            else if(arr[mid]>n){
+                end=mid-1;
+            }
+            else if(arr[mid]<n){
+                start=mid+1;
+            }
+        }
+        return -1;
+    }
+
+    public int findKthPositive(int[] arr, int k) {
+        int n=1;
+        int c=0;
+        int d=1;
+        while(n<=k){
+            int f=search(arr,d);
+            if(f==-1){
+                n++;
+            }
+            c++;
+            d++;
+        }
+        return c;
+    }
+}
+
+
+
+// SECOND SOLUTION 
+
+// class Solution {
+//     public int findKthPositive(int[] arr, int k) {
+//         int l=0,
+//         r=arr.length-1;
+//         while(l<=r){
+//             int m=(l+r)/2;
+//             int p=arr[m]-(m+1);
+//             if(p>=k){
+//                 r=m-1;
+//             }
+//             else{
+//                 l=m+1;
+//             }    
+//         }
+//         if{(r<0)
+//             return k;
+//         }
+//         return arr[r]+(k-arr[r]+r+1);
+//     }
+// }
+
+
+
+
+// THIRD SOLUTION:
+
+// class Solution {
+//     public int findKthPositive(int[] arr, int k) {
+//         int n=arr.length;
+//         int prev=0,i=0;
+//         while(i<n){
+//             if(arr[i]==prev+1){
+//             i++;
+//             }
+                
+//             else{
+//                 k--;
+//                 if(k==0) return prev+1;
+
+//             }
+//             prev++;
+//         }
+
+//         while(k>0){
+//             k--;
+//             prev++;
+//         }
+
+//         return prev;
+//     }
+// }
+
