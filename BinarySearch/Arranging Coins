@@ -1,0 +1,20 @@
+class Solution {
+    public int arrangeCoins(int n) {
+        int i=1;
+        int ans=0;
+        while(n>=i){
+            n=n-i;
+            ans++;
+            i++;
+
+        }
+        return ans;
+    }
+}
+
+
+// class Solution {
+//     public int arrangeCoins(int n) {
+//         return (int) (Math.sqrt(2) * Math.sqrt(n + 0.125) - 0.5);
+//     }
+// }
