@@ -1,0 +1,86 @@
+
+class Solution {
+
+        static boolean pathSum2(TreeNode root, int target,int sum,boolean ans){
+        
+        if(root == null ){
+            return ans;
+        }
+
+        System.out.print(sum+" ");
+        sum = sum + root.val;
+
+        if(root.left == null && root.right == null && ans!=true){
+            System.out.println();
+            System.out.print(sum+" ");
+            if(sum==target){
+                ans=true;
+                return ans;
+            }
+            if(sum>target){
+                sum=sum-root.val;
+                ans=false;
+                return ans;
+            }
+            if(sum<target){
+                ans=false;
+                return ans;
+            }
+        }
+
+        ans=pathSum2(root.left,target,sum,ans);
+        ans=pathSum2(root.right,target,sum,ans);
+
+        return ans;
+    }
+
+
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+
+        if(root==null && targetSum==0){
+            return false;
+        }
+        if(root==null && targetSum!=0){
+            return false;
+        }
+        if(root.val==targetSum && root.left==null && root.right==null){
+            return true;
+        }
+        if(root.val==targetSum && (root.left==null || root.right==null) ){
+            return false;
+        }
+
+
+        int sum = root.val;
+
+        boolean  s1=pathSum2(root.left,targetSum,sum,false);
+        boolean  s2=pathSum2(root.right,targetSum,sum,false);
+
+        if(s1==true || s2==true){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
+
+
+
+
+
+// ANOTHER SOLUTION 
+
+// class Solution {
+//     public boolean hasPathSum(TreeNode root, int targetSum) {
+//         if (root == null) return false;
+        
+//         targetSum -= root.val;
+        
+//         if (root.left == null && root.right == null) {
+//             return targetSum == 0;
+//         }
+        
+//         return hasPathSum(root.left, targetSum) || hasPathSum(root.right, targetSum);
+//     }
+// }
