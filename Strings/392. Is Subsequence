@@ -1,0 +1,39 @@
+# Approach
+step1- take two pointers for both the given string
+step2-check wheather the element of string s present in the t or not 
+step3-count if match and increase both pointers else
+increase t's pointer only .
+
+in the end check if count == s.length() return true else false.
+
+
+# Code
+```java []
+class Solution {
+
+    // Two Pointer //
+
+    static int check(String s,String t,int i, int j, int count){
+        if(i==s.length() || j==t.length()){
+            return count;
+        }
+
+        if(s.charAt(i)==t.charAt(j)){
+            count++;
+            return check(s,t,i+1,j+1,count);
+        }else{
+            return check(s,t,i,j+1,count);
+        }
+    }
+
+    public boolean isSubsequence(String s, String t) {
+        int count=check(s,t,0,0,0);
+
+        if(count==s.length()){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+}
