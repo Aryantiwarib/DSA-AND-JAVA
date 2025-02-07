@@ -1,0 +1,92 @@
+Approach 
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Solution {
+
+    static ArrayList<ArrayList<String>> queens(boolean[][] board , int r){
+        if(r==board.length){
+            ArrayList<ArrayList<String>> s = new ArrayList<>();
+            s.add(display(board));
+            return s;
+        }
+
+//        placing the queen and checking every row and col
+//        int count=0;
+        ArrayList<ArrayList<String>> ans = new ArrayList<>();
+        for(int col=0;col<board.length;col++){
+//            place the queen if it is safe
+            if(isSafe(board,r,col)){
+                board[r][col] = true;
+                ans.addAll(queens(board,r+1));
+                board[r][col] = false;
+            }
+        }
+
+        return ans;
+
+    }
+
+    static boolean isSafe(boolean[][] board, int r, int c){
+//        vertical check
+        for(int i =0;i<r;i++){
+            if(board[i][c]){
+                return false;
+            }
+        }
+
+//       diagonal left
+        int maxLeft=Math.min(r,c);
+        for(int i =1;i<=maxLeft;i++){
+            if(board[r-i][c-i]){
+                return false;
+            }
+        }
+
+        //diagonal right
+        int maxRight=Math.min(r,board.length-c-1);
+        for(int i =1;i<=maxRight;i++){
+            if(board[r-i][c+i]){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    static ArrayList<String> display(boolean[][] board){
+        ArrayList<String> l = new ArrayList<>();
+        for(boolean[] ele : board){
+            String str = "";
+            for(boolean e :ele){
+                if(e){
+                    str+="Q";
+                }else{
+                    str+=".";
+                }
+            }
+            l.add(str);
+        }
+        return l;
+    }
+
+    public List<List<String>> solveNQueens(int n) {
+        boolean[][] board=new boolean[n][n];
+        List<List<String>> ans = new ArrayList<>(queens(board, 0));
+
+
+        // List<List<String>> a = ans;
+        return ans;
+    }
+}
