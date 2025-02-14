@@ -1,0 +1,60 @@
+# Approach
+
+Use BFS
+step1 -- take a queue add the element of a level in the queue
+step2- add the last element of queue in the main aswer 
+last one always is alway visible to man which stand on the right hand side 
+
+Please Give a Star to the repo
+
+
+# Code
+```java []
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        if(root == null){
+            return ans;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while(!queue.isEmpty()){
+            int levelsize = queue.size();
+            ArrayList<Integer> list = new ArrayList<>();
+
+            for(int i = 0;i<levelsize;i++){
+                TreeNode node = queue.poll();
+                list.add(node.val);
+                
+                if(node.left!=null){
+                    queue.offer(node.left);
+                }
+
+                if(node.right!=null){
+                    queue.offer(node.right);
+                }
+            }
+            ans.add(list.get(list.size()-1));
+
+        }
+        return ans;
+    }
+}
+```
